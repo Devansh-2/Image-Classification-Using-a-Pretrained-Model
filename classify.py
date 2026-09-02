@@ -7,6 +7,9 @@ runs it on a handful of sample images, and prints the top predictions.
 Usage:
     python classify.py                # classifies every image in ./images
     python classify.py my_photo.jpg   # classifies the images you pass in
+
+The `load_model` and `classify` functions are also imported by app.py,
+the web interface.
 """
 
 import sys
@@ -30,8 +33,9 @@ def load_model():
     return model, weights.transforms(), weights.meta["categories"]
 
 
-def classify(image_path, model, preprocess, labels):
-    image = Image.open(image_path).convert("RGB")
+def classify(image_source, model, preprocess, labels, top_k=TOP_K):
+    """image_source can be a file path or any file-like object (e.g. an upload)."""
+    image = Image.open(image_source).convert("RGB")
 
     # Resize / crop / normalize the image exactly the way the model expects,
     # then add a batch dimension: (3, 224, 224) -> (1, 3, 224, 224).
@@ -42,7 +46,7 @@ def classify(image_path, model, preprocess, labels):
 
     # Turn raw scores into probabilities that sum to 1.
     probs = torch.softmax(logits[0], dim=0)
-    top_probs, top_ids = probs.topk(TOP_K)
+    top_probs, top_ids = probs.topk(top_k)
     return [(labels[i], p.item()) for p, i in zip(top_probs, top_ids)]
 
 
