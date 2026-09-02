@@ -24,8 +24,8 @@ dog.jpg
 ## Sample images
 
 The `images/` folder holds a handful of small public-domain photos
-(a dog, a cat, a car, a banana, a pizza) plus one deliberate failure case,
-`portrait.jpg` (see Limitations below). Drop in any `.jpg`/`.png` to try more.
+(a dog, a cat, a car, a banana, a pizza) plus a few deliberate tricky cases,
+`portrait.jpg`, `dogs.jpg` and `fruit.jpg` (see Limitations below). Drop in any `.jpg`/`.png` to try more.
 The full output of a run is in `sample_output.txt`.
 
 ## How the pretrained model works (in plain English)
@@ -56,5 +56,11 @@ The full output of a run is in `sample_output.txt`.
    `portrait.jpg` shows this: ImageNet has no "person" class, so a man in
    sunglasses under blue light comes out as `mask 24.9%` / `ski mask 22.0%`.
    Notice the low confidence, which is a useful hint that the model is unsure.
+   The model also assumes **one object per image**: `dogs.jpg` (a collage of
+   nine breeds) gets `Welsh springer spaniel 55.0%` for just one of them, and
+   `fruit.jpg` (a mixed fruit pile) spreads its guesses across
+   `custard apple 33.1%`, `acorn squash 16.6%`, `spaghetti squash 11.2%`.
+   Detecting several objects at once needs a different kind of model
+   (an *object detector*), not a classifier.
    It also has no idea *why* it is right; it has simply learned patterns of
    pixels that correlate with each label.
