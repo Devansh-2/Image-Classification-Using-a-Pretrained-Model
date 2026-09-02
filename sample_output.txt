@@ -1,0 +1,25 @@
+
+banana.jpg
+  1. banana                     98.8%
+  2. broccoli                    0.3%
+  3. artichoke                   0.2%
+
+car.jpg
+  1. sports car                 83.1%
+  2. racer                       8.4%
+  3. grille                      4.0%
+
+cat.jpg
+  1. tiger cat                  53.8%
+  2. tabby                      25.4%
+  3. Egyptian cat               17.3%
+
+dog.jpg
+  1. Rottweiler                 73.3%
+  2. black-and-tan coonhound     9.2%
+  3. Labrador retriever          5.5%
+
+pizza.jpg
+  1. pizza                      98.5%
+  2. frying pan                  0.5%
+  3. potpie                      0.3%
