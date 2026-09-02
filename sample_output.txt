@@ -19,6 +19,16 @@ dog.jpg
   2. black-and-tan coonhound     9.2%
   3. Labrador retriever          5.5%
 
+dogs.jpg
+  1. Welsh springer spaniel     55.0%
+  2. basset                     10.7%
+  3. cocker spaniel             10.0%
+
+fruit.jpg
+  1. custard apple              33.1%
+  2. acorn squash               16.6%
+  3. spaghetti squash           11.2%
+
 pizza.jpg
   1. pizza                      98.5%
   2. frying pan                  0.5%
