@@ -24,7 +24,9 @@ dog.jpg
 ## Sample images
 
 The `images/` folder holds a handful of small public-domain photos
-(a dog, a cat, a car, a banana, a pizza, ...). Drop in any `.jpg`/`.png` to try more.
+(a dog, a cat, a car, a banana, a pizza) plus one deliberate failure case,
+`portrait.jpg` (see Limitations below). Drop in any `.jpg`/`.png` to try more.
+The full output of a run is in `sample_output.txt`.
 
 ## How the pretrained model works (in plain English)
 
@@ -51,5 +53,8 @@ The `images/` folder holds a handful of small public-domain photos
 
 5. **Limitations.** The model can only name things in its 1,000 ImageNet
    classes, so a photo of something unusual will get a "closest match" guess.
+   `portrait.jpg` shows this: ImageNet has no "person" class, so a man in
+   sunglasses under blue light comes out as `mask 24.9%` / `ski mask 22.0%`.
+   Notice the low confidence, which is a useful hint that the model is unsure.
    It also has no idea *why* it is right; it has simply learned patterns of
    pixels that correlate with each label.
