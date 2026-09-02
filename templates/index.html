@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image Classifier</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 3rem auto; padding: 0 1rem; color: #222; }
+    h1 { margin-bottom: .25rem; }
+    .muted { color: #666; }
+    form { margin: 1.5rem 0; padding: 1.5rem; border: 2px dashed #bbb; border-radius: 12px; text-align: center; }
+    input[type=file] { margin-bottom: 1rem; }
+    button { padding: .6rem 1.4rem; font-size: 1rem; border: 0; border-radius: 8px; background: #2563eb; color: #fff; cursor: pointer; }
+    button:hover { background: #1d4ed8; }
+    .error { background: #fee2e2; color: #991b1b; padding: .75rem 1rem; border-radius: 8px; }
+    .result { display: flex; gap: 1.5rem; align-items: flex-start; }
+    .result img { max-width: 260px; max-height: 260px; border-radius: 8px; }
+    table { border-collapse: collapse; flex: 1; }
+    td { padding: .4rem .6rem; }
+    td.prob { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .bar { height: 8px; background: #2563eb; border-radius: 4px; }
+    tr:first-child td { font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>Image Classifier</h1>
+  <p class="muted">Pretrained MobileNetV2 (ImageNet, 1,000 classes). Upload a photo to see its top-5 guesses.</p>
+
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" name="image" accept="image/*" required><br>
+    <button type="submit">Classify</button>
+  </form>
+
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
+
+  {% if predictions %}
+    <div class="result">
+      <img src="{{ preview }}" alt="Uploaded image">
+      <table>
+        {% for p in predictions %}
+          <tr>
+            <td>{{ p.label }}</td>
+            <td class="prob">{{ "%.1f"|format(p.probability * 100) }}%</td>
+            <td style="width: 40%"><div class="bar" style="width: {{ p.probability * 100 }}%"></div></td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% endif %}
+</body>
+</html>

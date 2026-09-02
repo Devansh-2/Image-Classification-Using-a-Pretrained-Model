@@ -1,10 +1,11 @@
 # Image Classification Using a Pretrained Model
 
 A tiny, beginner-friendly example that uses **MobileNetV2** (a small pretrained
-neural network from PyTorch's `torchvision`) to guess what is in a few sample
-images.
+neural network from PyTorch's `torchvision`) to guess what is in a photo.
+It comes as a command-line script, a web app you can upload photos to, and a
+JSON API.
 
-## Run it
+## Run it (command line)
 
 ```bash
 pip install -r requirements.txt
@@ -20,6 +21,39 @@ dog.jpg
   2. black-and-tan coonhound     9.2%
   3. Labrador retriever          5.5%
 ```
+
+## Run it (web app)
+
+```bash
+python app.py
+```
+
+Open <http://localhost:5000>, choose a photo and press **Classify**. The page
+shows your image next to the top-5 guesses with confidence bars.
+
+![web app screenshot](docs/webapp.png)
+
+### JSON API
+
+The same server exposes `POST /predict` so other programs (a phone app, a
+script, another website) can use the model:
+
+```bash
+curl -F "image=@images/dog.jpg" http://localhost:5000/predict
+```
+
+```json
+{"predictions": [
+  {"label": "Rottweiler", "probability": 0.7329},
+  {"label": "black-and-tan coonhound", "probability": 0.0918},
+  {"label": "Labrador retriever", "probability": 0.0552},
+  {"label": "Tibetan mastiff", "probability": 0.0243},
+  {"label": "Doberman", "probability": 0.0213}
+]}
+```
+
+Bad input returns a `400` with an `error` message (wrong file type, corrupt
+image, or a file over 10 MB).
 
 ## Sample images
 
