@@ -23,3 +23,8 @@ pizza.jpg
   1. pizza                      98.5%
   2. frying pan                  0.5%
   3. potpie                      0.3%
+
+portrait.jpg
+  1. mask                       24.9%
+  2. ski mask                   22.0%
+  3. sweatshirt                  3.3%
